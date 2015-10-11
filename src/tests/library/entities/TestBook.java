@@ -7,11 +7,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import library.interfaces.entities.EBookState;
+import library.interfaces.entities.ELoanState;
 import library.interfaces.entities.IBook;
 import library.interfaces.entities.ILoan;
 import library.interfaces.entities.IMember;
 import library.entities.Book;
 import library.entities.Loan;
+
+
+
 
 import java.util.Date;
 import java.util.Calendar;
@@ -25,6 +30,8 @@ public class TestBook {
 	Calendar _cal;
 	String _author , _title, _callNumber;
 	int _bookID;
+	ELoanState state;
+	EBookState status;
 
 	@Before
 	public void setUp() throws Exception {		
@@ -54,22 +61,22 @@ public class TestBook {
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
-	public void testCreateBadParamBookNull() {
+	public void testCreateAuthorNull() {
 		IBook book = new Book ( null , _title, _callNumber, _bookID);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
-	public void testCreateBadParamMemberNull() {
+	public void testCreateTitleNull() {
 		IBook book = new Book ( _author , null, _callNumber, _bookID);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
-	public void testCreateBadParamBorrowDateNull() {
+	public void testCreateBadParamCallNUmberNull() {
 		IBook book = new Book ( _author , _title, null, _bookID);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
-	public void testCreateBadParamDueDateNull() {
+	public void testCreateBadParamBookIDNull() {
 		IBook book = new Book ( _author , _title, _callNumber, _bookID);
 		if (_bookID <- 0)
 		{
@@ -77,8 +84,42 @@ public class TestBook {
 		}
 	}
 	
+	@Test
+	public void borrow(ILoan loan) {
+		//setup
+				int id = 1;
+				
+				//execute
+				_loan.commit(id);
+		
+		//verifies and asserts
+		verify(_book).borrow(_loan);
+		verify(_member).addLoan(_loan);
+		
+		assertTrue(_loan.isCurrent());
+		int actual = _loan.getID();
+		assertEquals(id, actual);
+	}
+	
+	
+	
 		
 	/**
+	 
+	 public void borrow(ILoan loan) {
+		if (loan == null) {
+			throw new IllegalArgumentException(String.format("Book: borrow : Bad parameter: loan cannot be null"));
+		}
+		if (!(state == EBookState.AVAILABLE)) {
+			throw new RuntimeException(String.format("Illegal operation in state : %s", state));
+		}
+		this.loan = loan;
+		state = EBookState.ON_LOAN;
+
+	}
+	
+	
+	
 	@Test
 	public void testBook() {
 		fail("Not yet implemented");
