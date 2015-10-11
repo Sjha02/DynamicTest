@@ -12,6 +12,7 @@ import library.interfaces.entities.ILoan;
 import library.interfaces.entities.IMember;
 import library.entities.Book;
 import library.entities.Loan;
+import library.entities.Member;
 
 import java.util.Date;
 import java.util.Calendar;
@@ -26,7 +27,7 @@ public class TestBook {
 	Date _borrowDate, _dueDate;
 	Calendar _cal;
 	
-	int _bookId;	
+	int _bookID;	
 	
 	@Before
 	public void setUp() throws Exception {
@@ -34,16 +35,13 @@ public class TestBook {
 		_member = mock(IMember.class);
 		_loan = mock(ILoan.class);
 		
-		
-		
-		
 		_cal = Calendar.getInstance();
 		_borrowDate = _cal.getTime();
 		_cal.add(Calendar.DATE, ILoan.LOAN_PERIOD);
 		_dueDate = _cal.getTime();
 		 
 		
-		_book = new Book( _author, _title, _callNumber, _bookId);
+		_book = new Book( _author, _title, _callNumber, _bookID);
 	}
 
 	@After
@@ -54,13 +52,13 @@ public class TestBook {
 	
 	@Test
 	public void testCreate() {
-		IBook book = new Book( _author, _title, _callNumber,_bookId);
+		IBook book = new Book( _author, _title, _callNumber,_bookID);
 		assertTrue( book instanceof Book);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testCreateBadParamBookNull() {
-		IBook book = new Book( _author, _title, _callNumber,_bookId);
+		IBook book = new Book( _author, _title, _callNumber,_bookID);
 	}
 
 	/**
