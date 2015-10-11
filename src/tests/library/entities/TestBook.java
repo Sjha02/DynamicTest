@@ -85,7 +85,7 @@ public class TestBook {
 	}
 	
 	@Test
-	public void borrow(ILoan loan) {
+	public void testCreateborrow(ILoan loan) {
 		//setup
 		int id = 1;
 				
