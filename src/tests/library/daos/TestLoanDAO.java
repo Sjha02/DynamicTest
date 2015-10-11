@@ -61,7 +61,7 @@ public class TestLoanDAO {
 		IBook book = mock(IBook.class);
 		ILoan expectedLoan = mock(ILoan.class);
 		
-		when(_helper.makeLoan(eq(book), eq(member), any(Date.class), any(Date.class))).thenReturn(expectedLoan);
+		when(_helper.makeLoan(eq(_author), eq(member), any(Date.class), any(Date.class))).thenReturn(expectedLoan);
 		
 		//execute
 		ILoan actualLoan = _dao.createLoan(member, book);

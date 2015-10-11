@@ -1,6 +1,8 @@
 package tests.library.daos;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 import org.junit.After;
@@ -49,6 +51,29 @@ public class TestBookDAO {
 		public void testConstructor() {
 			BookMapDAO dao = new BookMapDAO(_helper);
 			assertTrue(dao instanceof IBookDAO);
+		}
+		
+		@Test(expected=IllegalArgumentException.class)
+		public void testConstructorHelperNull() {
+			BookMapDAO dao = new BookMapDAO(null);
+		}
+		
+		@Test
+		public void testCreateLoan() {
+			
+			//setup
+			IMember member = mock(IMember.class);
+			ILoan loan= mock(ILoan.class);
+			IBook expectedBook = mock(IBook.class);
+			
+			when(_helper.addBook(eq(author), eq(title), eq(callNumber), eq(id))).thenReturn(expectedBook);
+			
+			//execute
+			IBook actualBook = _dao.addBook((author, title, callNo));
+			
+			//verifies and asserts
+			verify(_helper).makeLoan(eq(book), eq(member), any(Date.class), any(Date.class));
+			assertEquals(expectedLoan, actualLoan);		
 		}
 	}
 }
