@@ -120,41 +120,4 @@ public class TestLoan {
 	}
 	
 	
-	
-/*
-	@Test
-	public void testComplete() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsCurrent() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsOverDue() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCheckOverDue() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetBorrower() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetBook() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetID() {
-		fail("Not yet implemented");
-	}
-*/
 }

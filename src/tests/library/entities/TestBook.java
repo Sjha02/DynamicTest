@@ -87,10 +87,10 @@ public class TestBook {
 	@Test
 	public void borrow(ILoan loan) {
 		//setup
-				int id = 1;
+		int id = 1;
 				
-				//execute
-				_loan.commit(id);
+		//execute
+		_loan.commit(id);
 		
 		//verifies and asserts
 		verify(_book).borrow(_loan);
@@ -100,90 +100,9 @@ public class TestBook {
 		int actual = _loan.getID();
 		assertEquals(id, actual);
 	}
+}
 	
 	
 	
 		
-	/**
-	 
-	 public void borrow(ILoan loan) {
-		if (loan == null) {
-			throw new IllegalArgumentException(String.format("Book: borrow : Bad parameter: loan cannot be null"));
-		}
-		if (!(state == EBookState.AVAILABLE)) {
-			throw new RuntimeException(String.format("Illegal operation in state : %s", state));
-		}
-		this.loan = loan;
-		state = EBookState.ON_LOAN;
-
-	}
 	
-	
-	
-	@Test
-	public void testBook() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testBorrow() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetLoan() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testReturnBook() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testLose() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRepair() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDispose() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetState() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetAuthor() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetTitle() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetCallNumber() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetID() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
-	}
-	*/
-
-}
