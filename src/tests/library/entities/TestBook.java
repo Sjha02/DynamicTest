@@ -12,7 +12,6 @@ import library.interfaces.entities.ILoan;
 import library.interfaces.entities.IMember;
 import library.entities.Book;
 import library.entities.Loan;
-import library.entities.Member;
 
 import java.util.Date;
 import java.util.Calendar;
@@ -22,48 +21,65 @@ public class TestBook {
 	IBook _book;
 	IMember _member;
 	ILoan _loan;
-	
-	String _author, _title, _callNumber;
 	Date _borrowDate, _dueDate;
 	Calendar _cal;
-	
-	int _bookID;	
-	
+	String _author , _title, _callNumber;
+	int _bookID;
+
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception {		
 		
-		_member = mock(IMember.class);
 		_loan = mock(ILoan.class);
+		_member = mock(IMember.class);
 		
 		_cal = Calendar.getInstance();
 		_borrowDate = _cal.getTime();
 		_cal.add(Calendar.DATE, ILoan.LOAN_PERIOD);
 		_dueDate = _cal.getTime();
-		 
+
+		_book = new Book( _author , _title, _callNumber, _bookID);
 		
-		_book = new Book( _author, _title, _callNumber, _bookID);
 	}
 
-	@After
+	
 	public void tearDown() throws Exception {
 		
 		_book = null;
 	}
-	
+
 	@Test
 	public void testCreate() {
-		IBook book = new Book( _author, _title, _callNumber,_bookID);
+		IBook book = new Book ( _author , _title, _callNumber, _bookID);
 		assertTrue( book instanceof Book);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testCreateBadParamBookNull() {
-		IBook book = new Book( _author, _title, _callNumber,_bookID);
+		IBook book = new Book ( null , _title, _callNumber, _bookID);
 	}
-
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testCreateBadParamMemberNull() {
+		IBook book = new Book ( _author , null, _callNumber, _bookID);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testCreateBadParamBorrowDateNull() {
+		IBook book = new Book ( _author , _title, null, _bookID);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testCreateBadParamDueDateNull() {
+		IBook book = new Book ( _author , _title, _callNumber, _bookID);
+		if (_bookID <- 0)
+		{
+			
+		}
+	}
+	
+		
 	/**
-	/@Test
-
+	@Test
 	public void testBook() {
 		fail("Not yet implemented");
 	}
