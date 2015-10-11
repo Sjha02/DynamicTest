@@ -39,7 +39,7 @@ public class TestLoan {
 
 	}
 
-	@After
+
 	public void tearDown() throws Exception {
 		_loan = null;
 	}
