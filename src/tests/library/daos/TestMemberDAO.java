@@ -1,6 +1,8 @@
 package tests.library.daos;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 import org.junit.After;
@@ -29,6 +31,13 @@ import java.util.Map;
 @RunWith(MockitoJUnitRunner.class)
 public class TestMemberDAO {
 	
+	String firstName = null;
+	String lastName = null;
+	String contactPhone = null;
+	String emailAddress = null;
+	int id = 1;
+	
+	
 	IMemberHelper _helper;
 	IMemberDAO _dao;
 	
@@ -53,6 +62,27 @@ public class TestMemberDAO {
 	@Test(expected=IllegalArgumentException.class)
 	public void testConstructorHelperNull() {
 		MemberMapDAO dao = new MemberMapDAO(null);
+	}
+	
+	@Test
+	public void testCreateMember() {
+		
+		//setup
+		ILoan loan = mock(ILoan.class);
+		IBook book = mock(IBook.class);
+		IMember expectedMember = mock(IMember.class);
+		
+		
+		when(_helper.makeMember(eq(firstName), eq(lastName), eq(contactPhone), eq(emailAddress), eq(id))).thenReturn(expectedMember);
+		
+		//execute
+	
+		
+		IMember actualMember = _dao.getMemberByID(1);
+		
+		//verifies and asserts
+		verify(_helper).makeMember(eq(firstName), eq(lastName), eq(contactPhone), eq(emailAddress), eq(id));
+		assertEquals(expectedMember, actualMember);		
 	}
 	
 	
