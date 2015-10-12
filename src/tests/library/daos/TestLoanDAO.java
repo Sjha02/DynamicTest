@@ -7,14 +7,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import library.daos.LoanMapDAO;
+
 import library.interfaces.daos.ILoanDAO;
 import library.interfaces.daos.ILoanHelper;
+
 import library.interfaces.entities.ILoan;
 import library.interfaces.entities.IBook;
 import library.interfaces.entities.IMember;
@@ -61,7 +64,7 @@ public class TestLoanDAO {
 		IBook book = mock(IBook.class);
 		ILoan expectedLoan = mock(ILoan.class);
 		
-		when(_helper.makeLoan(eq(_author), eq(member), any(Date.class), any(Date.class))).thenReturn(expectedLoan);
+		when(_helper.makeLoan(eq(book), eq(member), any(Date.class), any(Date.class))).thenReturn(expectedLoan);
 		
 		//execute
 		ILoan actualLoan = _dao.createLoan(member, book);
@@ -112,13 +115,11 @@ public class TestLoanDAO {
 		assertEquals(loan, actual);		
 	}
 	
-	/**
 	@Test
 	public void testCommit2() {
 		//setup
 		ILoan loan = mock(ILoan.class);
 		//Map<Integer, ILoan> spyMap = spy(new HashMap<Integer,ILoan>());
-	
 		Map<Integer, ILoan> mockMap = mock(Map.class);
 		_dao = new LoanMapDAO(_helper, mockMap);
 		when(mockMap.get(Integer.valueOf(1))).thenReturn(loan);
@@ -136,7 +137,7 @@ public class TestLoanDAO {
 		
 		assertEquals(loan,actual);
 		
-	}*/
+	}
 	
 	
 	

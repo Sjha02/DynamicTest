@@ -1,5 +1,4 @@
 package tests.library.daos;
-
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -59,21 +58,39 @@ public class TestBookDAO {
 		}
 		
 		@Test
-		public void testCreateLoan() {
+		public void testCreateBook() {
 			
 			//setup
 			IMember member = mock(IMember.class);
 			ILoan loan= mock(ILoan.class);
 			IBook expectedBook = mock(IBook.class);
 			
-			when(_helper.addBook(eq(author), eq(title), eq(callNumber), eq(id))).thenReturn(expectedBook);
+			String _author = null;
+			String _title = null;
+			String _callNumber = null;
+			int _id = 0;
+			when(_helper.makeBook(eq(_author), eq(_title), eq(_callNumber), eq(_id))).thenReturn(expectedBook);
 			
 			//execute
-			IBook actualBook = _dao.addBook((author, title, callNo));
+			IBook actualBook = _dao.addBook( _author, _title, _callNumber);
 			
 			//verifies and asserts
-			verify(_helper).makeLoan(eq(book), eq(member), any(Date.class), any(Date.class));
-			assertEquals(expectedLoan, actualLoan);		
+			verify(_helper).makeBook(eq(_author), eq(_title), eq(_callNumber), eq(_id));
+			assertEquals(expectedBook, actualBook);		
+		}
+		
+		@Test(expected=IllegalArgumentException.class)
+		public void testCreateLoanBookNull() {
+			
+			//setup
+			IMember member = mock(IMember.class);
+			
+			int id = 0;
+			//execute
+			IBook actualBook = _dao.getBookByID( id);
+			
+			//verifies and asserts
+			fail("Should have thrown exception");
 		}
 	}
 }
