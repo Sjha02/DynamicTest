@@ -44,6 +44,18 @@ public class TestMemberDAO {
 		_dao = null;
 	}
 	
+	@Test
+	public void testConstructor() {
+		MemberMapDAO dao = new MemberMapDAO(_helper);
+		assertTrue(dao instanceof IMemberDAO);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testConstructorHelperNull() {
+		MemberMapDAO dao = new MemberMapDAO(null);
+	}
+	
+	
 	/**
 
 	@Before
