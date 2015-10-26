@@ -263,4 +263,9 @@ public class BorrowUC_CTL implements ICardReaderListener,
 		return bld.toString();		
 	}
 
+	public EBorrowState getState() {
+		// TODO Auto-generated method stub
+		return state;
+	}
+
 }
